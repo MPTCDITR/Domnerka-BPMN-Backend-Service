@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  bpnm-db:
+    image: mysql:latest
+    container_name: bpnm_db
+    environment:
+      MYSQL_ROOT_PASSWORD: bpmnservice
+      MYSQL_DATABASE: bpmn_db
+      MYSQL_USER: bpmnservice
+      MYSQL_PASSWORD: bpmnservice
+    ports:
+      - "3307:3306"
+    volumes:
+      - bpnm-db-data:/var/lib/mysql
+    restart: always
+
+volumes:
+  bpnm-db-data:

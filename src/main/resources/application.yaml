@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    default: default
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLDialect
+      format_sql: true
+      use_sql_comments: true
+      show_sql: true
+      physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_ISSUER_URI}/realms/poc-domnerka
+        registration:
+          keycloak:
+            client-id: camunda-identity-service
+            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            scope: openid,profile,email
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+      resourceserver:
+        jwt:
+          issuer-uri:  ${KEYCLOAK_BASE_URL}/realms/poc-domnerka
+          jwk-set-uri: ${KEYCLOAK_BASE_URL}/realms/poc-domnerka/protocol/openid-connect/certs
+
+plugin.identity.keycloak:
+  keycloakIssuerUrl: ${KEYCLOAK_BASE_URL}/realms/poc-domnerka
+  keycloakAdminUrl: ${KEYCLOAK_BASE_URL}/admin/realms/poc-domnerka
+  clientId: camunda-identity-service
+  clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+  useUsernameAsCamundaUserId: true
+  administratorGroupName: camunda-admin
+  disableSSLCertificateValidation: false
+  realm: poc-domnerka
+  enforceSubgroupsInGroupQuery: true
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS}
+
+keycloak:
+  base-url: ${KEYCLOAK_BASE_URL}
