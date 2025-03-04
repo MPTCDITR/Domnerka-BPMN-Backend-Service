@@ -87,6 +87,7 @@ npm-debug.log
 
 # Application-specific files
 *.env
+.env
 .env.local
 .env.development.local
 .env.test.local

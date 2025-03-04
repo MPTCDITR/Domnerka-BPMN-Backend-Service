@@ -16,6 +16,8 @@ public class Application {
     System.setProperty("KEYCLOAK_ISSUER_URI", dotenv.get("KEYCLOAK_ISSUER_URI"));
     System.setProperty("KEYCLOAK_CLIENT_SECRET", dotenv.get("KEYCLOAK_CLIENT_SECRET"));
     System.setProperty("CORS_ALLOWED_ORIGINS", dotenv.get("CORS_ALLOWED_ORIGINS"));
+    System.setProperty("CAMUNDA_ADMIN_ID", dotenv.get("CAMUNDA_ADMIN_ID"));
+    System.setProperty("CAMUNDA_ADMIN_PASSWORD", dotenv.get("CAMUNDA_ADMIN_PASSWORD"));
 
     SpringApplication.run(Application.class, args);
   }
