@@ -1,12 +1,12 @@
 package com.domnerka.workflow.bpmnprocess;
 
 import com.domnerka.workflow.dto.PagedResponseDto;
+import com.domnerka.workflow.entity.domnerka.BPMNProcessEntity;
 import com.domnerka.workflow.process.BPMNProcessDto;
 import com.domnerka.workflow.process.ExtendedProcessDefinitionDto;
 import com.domnerka.workflow.process.ProcessDefinitionBpmnDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.camunda.bpm.engine.rest.dto.runtime.ProcessInstanceDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,35 +22,30 @@ public class BPMNProcessController {
     public PagedResponseDto<ExtendedProcessDefinitionDto> getAllProcessDefinition(
             @RequestParam(required = false) String search,
             Pageable pageable) {
-        return bpmnProcessService.getAllProcessDefinition(search, pageable);
+        return bpmnProcessService.getAllBpmnProcess(search, pageable);
     }
 
     @GetMapping("/{processDefinitionId}")
     public ProcessDefinitionBpmnDto getProcessDefinition(@PathVariable String processDefinitionId) {
-        return bpmnProcessService.getProcessDefinition(processDefinitionId);
-    }
-
-    @PostMapping("/process-definition/{id}/start")
-    public ProcessInstanceDto startProcessInstance(@PathVariable String id) {
-        return ProcessInstanceDto
-                .fromProcessInstance(bpmnProcessService.startProcessInstanceByProcessDefinitionId(id));
+        return bpmnProcessService.getBpmnProcessById(processDefinitionId);
     }
 
     @PostMapping("")
-    public String deployBpmnProcess(@Valid @RequestBody BPMNProcessDto bpmnProcessDto) {
-        return bpmnProcessService.deployBpmnProcess(bpmnProcessDto);
+    public String createBPMNProcess(@Valid @RequestBody BPMNProcessDto bpmnProcessDto) {
+        return bpmnProcessService.saveBpmnProcess(bpmnProcessDto);
     }
 
-    @PutMapping("/process/{key}")
-    public ResponseEntity<String> updateBpmnProcess(@PathVariable String key,
-                                                    @RequestBody BPMNProcessDto bpmnProcessDto) {
-        String result = bpmnProcessService.updateDeployBpmnProcess(bpmnProcessDto, key);
-        return ResponseEntity.ok(result);
+    @PutMapping("/{key}")
+    public ResponseEntity<BPMNProcessEntity> updateBpmnProcess(
+            @PathVariable String key,
+            @RequestBody BPMNProcessDto bpmnProcessDto) {
+        BPMNProcessEntity updatedProcess = bpmnProcessService.updateBpmnProcessByKey(key, bpmnProcessDto);
+        return ResponseEntity.ok(updatedProcess);
     }
 
     @DeleteMapping("/{key}")
     public ResponseEntity<String> deleteBpmnProcess(@PathVariable String key) {
-        bpmnProcessService.deleteBpmnProcess(key);
-        return ResponseEntity.ok("Deleted all process definitions with key: " + key);
+        bpmnProcessService.deleteBpmnProcessByKey(key);
+        return ResponseEntity.ok("Deleted successfully with key: "+ key);
     }
 }

@@ -1,6 +1,5 @@
 package com.domnerka.workflow.camundautillity;
 
-import camundajar.impl.scala.collection.mutable.StringBuilder;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.text.StringEscapeUtils;
 import org.w3c.dom.Document;
@@ -98,7 +97,7 @@ public class BPMNModificationUtility {
 
     /**
      * Adds a description to the given BPMN XML.
-     *
+     * <p>
      * If the description is null or empty, the original BPMN XML is returned.
      * Otherwise, the description is added as a bpmn:documentation element inside
      * the process tag.

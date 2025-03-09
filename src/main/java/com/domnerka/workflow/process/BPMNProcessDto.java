@@ -31,6 +31,4 @@ public class BPMNProcessDto {
     @Size(min = 1, max = 255, message = "description must be between 1 and 255 characters")
     private String description;
 
-    @NotNull(message = "is featured is required!")
-    private Boolean isFeatured;
 }

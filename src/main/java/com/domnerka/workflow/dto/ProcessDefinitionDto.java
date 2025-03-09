@@ -1,45 +1,32 @@
-package com.domnerka.workflow.process;
-
+package com.domnerka.workflow.dto;
 
 import com.domnerka.workflow.entity.domnerka.BPMNProcessEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class ExtendedProcessDefinitionDto {
+@AllArgsConstructor
+@Builder
+public class ProcessDefinitionDto {
 
     private String id;
-
     private String key;
-
     private String name;
-
     private String description;
-
     private Integer version;
-
     private String resource;
-
     private String deploymentId;
-
     private Boolean suspended;
-
     private String tenantId;
-
     private String versionTag;
-
     private Integer historyTimeToLive;
-
     private Boolean startableInTasklist;
 
-    private String createdBy;
-
-    public static ExtendedProcessDefinitionDto fromEntity(BPMNProcessEntity bpmnProcess) {
-        ExtendedProcessDefinitionDto dto = new ExtendedProcessDefinitionDto();
+    public static ProcessDefinitionDto fromBpmnProcessEntity(BPMNProcessEntity bpmnProcess) {
+        ProcessDefinitionDto dto = new ProcessDefinitionDto();
         dto.setId(bpmnProcess.getId());
         dto.setKey(bpmnProcess.getKey());
         dto.setName(bpmnProcess.getName());
@@ -52,7 +39,6 @@ public class ExtendedProcessDefinitionDto {
         dto.setVersionTag(bpmnProcess.getVersionTag());
         dto.setHistoryTimeToLive(bpmnProcess.getHistoryTimeToLive());
         dto.setStartableInTasklist(bpmnProcess.getIsStartableInTasklist());
-        dto.setCreatedBy(bpmnProcess.getCreatedBy());
         return dto;
     }
 }

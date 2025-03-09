@@ -1,9 +1,9 @@
 package com.domnerka.workflow.process;
 
+import com.domnerka.workflow.dto.ProcessDefinitionDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.camunda.bpm.engine.rest.dto.repository.ProcessDefinitionDto;
 
 @Data
 @AllArgsConstructor
@@ -12,7 +12,7 @@ public class ProcessDefinitionBpmnDto {
 
     private ProcessDefinitionDto processDefinitionDto;
     private String bpmn;
-    private Boolean isFeatured;
     private String description;
+    private String createdBy;
 
 }
