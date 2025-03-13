@@ -1,10 +1,10 @@
 package com.domnerka.workflow.dto.form;
 
+import com.domnerka.workflow.entity.domnerka.FormDefinitionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -20,14 +20,13 @@ public class FormDefinitionDto {
     private String tenantId;
     private String deploymentTime;
 
-    public FormDefinitionDto(Map<String, Object> form) {
-        this.id = (String) form.get("ID_");
-        this.key = (String) form.get("KEY_");
-        this.name = (String) form.get("NAME_");
-        this.version = (Integer) form.get("VERSION_");
-        this.resource = (String) form.get("RESOURCE_NAME_");
-        this.deploymentId = (String) form.get("DEPLOYMENT_ID_");
-        this.tenantId = (String) form.get("TENANT_ID_");
-        this.deploymentTime = form.get("DEPLOY_TIME_").toString();
+    public FormDefinitionDto(FormDefinitionEntity entity) {
+        this.id = entity.getId();
+        this.key = entity.getKey();
+        this.name = entity.getName();
+        this.version = entity.getVersion();
+        this.resource = entity.getResourceName();
+        this.deploymentId = entity.getDeploymentId();
+        this.tenantId = entity.getTenantId();
     }
 }

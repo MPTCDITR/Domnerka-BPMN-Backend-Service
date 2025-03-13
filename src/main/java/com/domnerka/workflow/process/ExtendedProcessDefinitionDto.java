@@ -1,11 +1,9 @@
 package com.domnerka.workflow.process;
 
-
 import com.domnerka.workflow.entity.domnerka.BPMNProcessEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @AllArgsConstructor
